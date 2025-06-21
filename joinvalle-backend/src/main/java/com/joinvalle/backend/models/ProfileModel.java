@@ -1,16 +1,13 @@
 package com.joinvalle.backend.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.*;
 import lombok.Data;
+import java.util.List;
 
 @Data
 @Entity
 public class ProfileModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,11 +15,17 @@ public class ProfileModel {
     @OneToOne
     @JoinColumn(name = "user_id")
     private AppUserModel user;
-    
+
     private String description;
     private String phone;
-    
-    // métodos
-    // getEventos
-    // getContatos
+
+    // Métodos auxiliares (apesar do @Data)
+    // Exemplo: um perfil pode ser o criador de vários eventos
+    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
+    private List<EventModel> eventos;
+
+    // Exemplo opcional: contatos associados ao perfil
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
+    private List<ContactModel> contatos;
+
 }
