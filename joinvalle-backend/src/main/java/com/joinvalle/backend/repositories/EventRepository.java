@@ -7,27 +7,27 @@ import java.util.List;
 public interface EventRepository extends JpaRepository<EventModel, Long> {
 
     // Search events by category name (case-insensitive)
-    List<EventModel> findByCategoriaNomeContainingIgnoreCase(String categoria);
+    List<EventModel> findByCategoryNameContainingIgnoreCase(String categoryName);
 
     // Search events by title keyword (case-insensitive)
-    List<EventModel> findByTituloContainingIgnoreCase(String keyword);
+    List<EventModel> findByTitleContainingIgnoreCase(String keyword);
 
     // Get all draft events from a specific user
-    List<EventModel> findByRascunhoTrueAndCreatorUserId(Long userId);
+    List<EventModel> findByDraftTrueAndCreatorUserId(Long userId);
 
     // Get all events from a specific user, sorted by start date
-    List<EventModel> findByCreatorUserIdOrderByDataInicioDesc(Long userId);
+    List<EventModel> findByCreatorUserIdOrderByInicialDateDesc(Long userId);
 
     // For admin: list events that are pending approval
     List<EventModel> findByAprovedFalseAndRejectedFalse();
 
     // For public display: only approved events
-    List<EventModel> findByAprovadoTrue();
+    List<EventModel> findByAprovedTrue();
 
     // For search: approved events by title keyword
-    List<EventModel> findByTituloContainingIgnoreCaseAndAprovadoTrue(String keyword);
+    List<EventModel> findByTitleContainingIgnoreCaseAndAprovedTrue(String keyword);
 
     // (Optional) For statistics: count how many events are approved
-    Long countByAprovadoTrue();
+    Long countByAprovedTrue();
 
 }

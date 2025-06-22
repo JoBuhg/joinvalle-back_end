@@ -23,7 +23,7 @@ public class SearchService {
     public List<SearchResultDTO> search(String keyword) {
         List<SearchResultDTO> results = new ArrayList<>();
 
-        List<EventModel> events = eventRepo.findByTituloContainingIgnoreCase(keyword);
+        List<EventModel> events = eventRepo.findByTitleContainingIgnoreCase(keyword);
         for (EventModel event : events) {
             results.add(new SearchResultDTO("event", event.getId(), event.getTitle(), event.getDescription()));
         }
