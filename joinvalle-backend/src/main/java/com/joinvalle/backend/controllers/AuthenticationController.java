@@ -2,7 +2,9 @@ package com.joinvalle.backend.controllers;
 
 import com.joinvalle.backend.dtos.LoginRequestDTO;
 import com.joinvalle.backend.dtos.LoginResponseDTO;
+import com.joinvalle.backend.dtos.PasswordRecoveryRequestDTO;
 import com.joinvalle.backend.dtos.RegisterRequestDTO;
+import com.joinvalle.backend.dtos.SocialLoginRequestDTO;
 import com.joinvalle.backend.services.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,5 +30,16 @@ public class AuthenticationController {
             @RequestBody LoginRequestDTO request
     ) {
         return ResponseEntity.ok(service.authenticate(request));
+    }
+
+    @PostMapping("/recuperar-senha")
+    public ResponseEntity<String> recoverPassword(@RequestBody PasswordRecoveryRequestDTO request) {
+        service.recoverPassword(request.getEmail());
+        return ResponseEntity.ok("Se o e-mail existir, as instruções de recuperação foram enviadas.");
+    }
+
+    @PostMapping("/login/social")
+    public ResponseEntity<LoginResponseDTO> socialLogin(@RequestBody SocialLoginRequestDTO request) {
+        return ResponseEntity.ok(service.socialLogin(request.getEmail(), request.getName()));
     }
 } 
