@@ -23,7 +23,7 @@ public class EventModel {
     private Boolean draft = false;
     private Boolean canceled = false;
 
-    private Boolean aproved = false;
+    private Boolean approved = false;
     private Boolean rejected = false;
 
 

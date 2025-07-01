@@ -20,8 +20,8 @@ public class AdminService {
 
     public Map<String, List<?>> getPendingContent() {
         Map<String, List<?>> pending = new HashMap<>();
-        pending.put("events", eventRepo.findByAprovedFalseAndRejectedFalse());
-        pending.put("profiles", profileRepo.findByAprovedFalseAndRejectedFalse());
+        pending.put("events", eventRepo.findByApprovedFalseAndRejectedFalse());
+        pending.put("profiles", profileRepo.findByApprovedFalseAndRejectedFalse());
         return pending;
     }
 
@@ -30,7 +30,7 @@ public class AdminService {
         if (optional.isEmpty()) return false;
 
         EventModel event = optional.get();
-        event.setAproved(true);
+        event.setApproved(true);
         event.setRejected(false);
         eventRepo.save(event);
         return true;
@@ -41,7 +41,7 @@ public class AdminService {
         if (optional.isEmpty()) return false;
 
         EventModel event = optional.get();
-        event.setAproved(false);
+        event.setApproved(false);
         event.setRejected(true);
         eventRepo.save(event);
         return true;
@@ -52,7 +52,7 @@ public class AdminService {
         if (optional.isEmpty()) return false;
 
         ProfileModel profile = optional.get();
-        profile.setAproved(true);
+        profile.setApproved(true);
         profile.setRejected(false);
         profileRepo.save(profile);
         return true;
@@ -63,7 +63,7 @@ public class AdminService {
         if (optional.isEmpty()) return false;
 
         ProfileModel profile = optional.get();
-        profile.setAproved(false);
+        profile.setApproved(false);
         profile.setRejected(true);
         profileRepo.save(profile);
         return true;

@@ -19,15 +19,15 @@ public interface EventRepository extends JpaRepository<EventModel, Long> {
     List<EventModel> findByCreatorUserIdOrderByInicialDateDesc(Long userId);
 
     // For admin: list events that are pending approval
-    List<EventModel> findByAprovedFalseAndRejectedFalse();
+    List<EventModel> findByApprovedFalseAndRejectedFalse();
 
     // For public display: only approved events
-    List<EventModel> findByAprovedTrue();
+    List<EventModel> findByApprovedTrue();
 
     // For search: approved events by title keyword
-    List<EventModel> findByTitleContainingIgnoreCaseAndAprovedTrue(String keyword);
+    List<EventModel> findByTitleContainingIgnoreCaseAndApprovedTrue(String keyword);
 
     // (Optional) For statistics: count how many events are approved
-    Long countByAprovedTrue();
+    Long countByApprovedTrue();
 
 }

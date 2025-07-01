@@ -8,6 +8,6 @@ import java.util.List;
 public interface ProfileRepository extends JpaRepository<ProfileModel, Long> {
 
     List<ProfileModel> findByDescriptionContainingIgnoreCase(String keyword);
-    List<ProfileModel> findByAprovedFalseAndRejectedFalse();
+    List<ProfileModel> findByApprovedFalseAndRejectedFalse();
 
 }
