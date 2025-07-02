@@ -2,6 +2,7 @@ package com.joinvalle.backend.services;
 
 import com.joinvalle.backend.models.EventModel;
 import com.joinvalle.backend.models.ProfileModel;
+import com.joinvalle.backend.repositories.ActorRepository;
 import com.joinvalle.backend.repositories.EventRepository;
 import com.joinvalle.backend.repositories.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class AdminService {
 
     @Autowired
     private ProfileRepository profileRepo;
+
+    @Autowired
+    private ActorRepository actorRepository;
 
     public Map<String, List<?>> getPendingContent() {
         Map<String, List<?>> pending = new HashMap<>();
@@ -67,5 +71,13 @@ public class AdminService {
         profile.setRejected(true);
         profileRepo.save(profile);
         return true;
+    }
+
+    public long getTotalEventos() {
+        return eventRepo.count();
+    }
+
+    public long getTotalPerfis() {
+        return profileRepo.count();
     }
 }
