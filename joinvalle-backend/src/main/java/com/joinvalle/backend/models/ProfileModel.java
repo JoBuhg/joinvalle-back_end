@@ -22,7 +22,7 @@ public class ProfileModel {
     private String description;
     private String phone;
     
-    private Boolean aproved = false;
+    private Boolean approved = false;
     private Boolean rejected = false;
     
     // métodos
