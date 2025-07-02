@@ -1,12 +1,15 @@
 package com.joinvalle.backend.controllers;
 
 import com.joinvalle.backend.models.ActorModel;
+import com.joinvalle.backend.models.EventModel;
 import com.joinvalle.backend.services.ActorService;
+import com.joinvalle.backend.services.EventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/atores")
@@ -15,6 +18,7 @@ import java.util.List;
 public class ActorController {
 
     private final ActorService actorService;
+    private final EventService eventService; // Adicione esta linha
 
     @GetMapping
     public List<ActorModel> getAll() {
@@ -45,5 +49,16 @@ public class ActorController {
         return actorService.delete(id)
                 ? ResponseEntity.noContent().build()
                 : ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/{id}/eventos")
+    public ResponseEntity<EventModel> createEventForActor(@PathVariable Long id, @RequestBody EventModel event) {
+        Optional<ActorModel> actorOpt = actorService.getById(id);
+        if (actorOpt.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        event.setActor(actorOpt.get());
+        EventModel saved = eventService.create(event);
+        return ResponseEntity.ok(saved);
     }
 }

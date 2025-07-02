@@ -1,5 +1,6 @@
 package com.joinvalle.backend.models;
 
+import com.joinvalle.backend.models.ActorModel;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -45,4 +46,8 @@ public class EventModel {
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private List<AppUserModel> registered;
+
+    @ManyToOne
+    @JoinColumn(name = "actor_id")
+    private ActorModel actor;
 }
